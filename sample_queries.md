@@ -8,7 +8,7 @@
 
 **Example KQL Query:**
 
-    ```bash
+    ```
     Event
     | where EventID == 1 and ProcessName == "powershell.exe"
     | where CommandLine contains "-EncodedCommand" or CommandLine contains "-ExecutionPolicy Bypass"
