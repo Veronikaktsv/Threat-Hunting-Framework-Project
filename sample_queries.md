@@ -7,7 +7,7 @@
 - Look for event ID 4104 (Script Block Logging) or Sysmon Event ID 1 (Process Creation).
 
 **Example KQL Query:**
-    ```kql
+    ```
     Event
     | where EventID == 1 and ProcessName == "powershell.exe"
     | where CommandLine contains "-EncodedCommand" or CommandLine contains "-ExecutionPolicy Bypass"
