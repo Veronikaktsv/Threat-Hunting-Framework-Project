@@ -1,20 +1,45 @@
+
 {
-    "powershell_execution": {
-        "technique_id": "T1059.001",
-        "technique_name": "Command and Scripting Interpreter: PowerShell",
-        "tactic": "Execution",
-        "description": "Detects suspicious PowerShell execution which may indicate malicious script execution."
-    },
-    "suspicious_cmd": {
-        "technique_id": "T1059.003",
-        "technique_name": "Command and Scripting Interpreter: Windows Command Shell",
-        "tactic": "Execution",
-        "description": "Detects suspicious use of cmd.exe that may be associated with process injection or discovery."
-    },
-    "privilege_escalation": {
-        "technique_id": "T1068",
-        "technique_name": "Exploitation for Privilege Escalation",
-        "tactic": "Privilege Escalation",
-        "description": "Detects process creation or activity that may indicate exploitation for privilege escalation."
-    }
+  "T1059.001": {
+    "technique": "PowerShell",
+    "tactic": "Execution",
+    "description": "Adversaries may abuse PowerShell to execute commands and scripts.",
+    "score": 8,
+    "rules": ["powershell_encoded"]
+  },
+  "T1059.003": {
+    "technique": "Windows Command Shell",
+    "tactic": "Execution",
+    "description": "Adversaries may use cmd.exe to execute commands.",
+    "score": 6,
+    "rules": ["cmd_unusual_parent"]
+  },
+  "T1003": {
+    "technique": "Credential Dumping",
+    "tactic": "Credential Access",
+    "description": "Adversaries may attempt to dump credentials from LSASS.",
+    "score": 9,
+    "rules": ["lsass_access", "mimikatz"]
+  },
+  "T1543.003": {
+    "technique": "Create or Modify System Process: Windows Service",
+    "tactic": "Persistence",
+    "description": "Adversaries may create or modify Windows services for persistence.",
+    "score": 7,
+    "rules": ["service_creation"]
+  },
+  "T1053.005": {
+    "technique": "Scheduled Task/Job: Scheduled Task",
+    "tactic": "Persistence",
+    "description": "Adversaries may create scheduled tasks for persistence or execution.",
+    "score": 6,
+    "rules": ["scheduled_task", "scheduled_task_cmd"]
+  },
+  "T1105": {
+    "technique": "Ingress Tool Transfer",
+    "tactic": "Command and Control",
+    "description": "Adversaries may transfer tools or files via certutil.",
+    "score": 7,
+    "rules": ["certutil"]
+  }
 }
