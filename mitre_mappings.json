@@ -1,0 +1,20 @@
+{
+    "powershell_execution": {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting Interpreter: PowerShell",
+        "tactic": "Execution",
+        "description": "Detects suspicious PowerShell execution which may indicate malicious script execution."
+    },
+    "suspicious_cmd": {
+        "technique_id": "T1059.003",
+        "technique_name": "Command and Scripting Interpreter: Windows Command Shell",
+        "tactic": "Execution",
+        "description": "Detects suspicious use of cmd.exe that may be associated with process injection or discovery."
+    },
+    "privilege_escalation": {
+        "technique_id": "T1068",
+        "technique_name": "Exploitation for Privilege Escalation",
+        "tactic": "Privilege Escalation",
+        "description": "Detects process creation or activity that may indicate exploitation for privilege escalation."
+    }
+}
