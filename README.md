@@ -45,9 +45,9 @@ This project provides a Python-based threat hunting framework to automate detect
 
 4. Verify or update the XML file path in the command line when running the hunt script.
 
-## Usage
-Run the hunting framework:
-
+## Usage 
+1. Run the hunting framework:
+    
     ```bash
     python hunt_framework.py --input sample_data/Sysmon_sample.xml --format xml --output findings.json
 
