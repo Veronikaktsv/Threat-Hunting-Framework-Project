@@ -5,8 +5,7 @@
 **Logic:**
 - Detect execution of PowerShell with suspicious parameters (`-EncodedCommand`, `-NoProfile`, `-ExecutionPolicy Bypass`).
 - Look for event ID 4104 (Script Block Logging) or Sysmon Event ID 1 (Process Creation).
-
- Example KQL Query:.
+Example KQL Query:
 
     ```bash
     Event
