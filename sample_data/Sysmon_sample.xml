@@ -1,0 +1,10 @@
+<Event>
+  <System>
+    <Provider Name="Microsoft-Windows-Sysmon" />
+    <EventID>1</EventID>
+  </System>
+  <EventData>
+    <Data Name="Image">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data>
+    <Data Name="CommandLine">powershell.exe -ExecutionPolicy Bypass -EncodedCommand YwBhAGwAYwA=</Data>
+  </EventData>
+</Event>
