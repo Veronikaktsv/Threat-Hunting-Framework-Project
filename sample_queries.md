@@ -1,36 +1,36 @@
-# Sample Detection Queries
+# Sample Detection Queries and Logic
 
-## 1. Suspicious PowerShell Execution
-**MITRE Technique:** T1059.001 — PowerShell  
-**Logic:**
-- Detect execution of PowerShell with suspicious parameters (`-EncodedCommand`, `-NoProfile`, `-ExecutionPolicy Bypass`).
-- Look for event ID 4104 (Script Block Logging) or Sysmon Event ID 1 (Process Creation).
-Example KQL Query:
+This file contains example detection rules and queries used by the hunting framework.
 
-    ```bash
-    Event
-    | where EventID == 1 and ProcessName == "powershell.exe"
-    | where CommandLine contains "-EncodedCommand" or CommandLine contains "-ExecutionPolicy Bypass"
+## Powershell Encoded Command Detection
 
-## 2. New Service Installation
-**MITRE Technique:** T1543.003 — Windows Service
-**Logic:**
-- Detect creation of new services.
-- Look for Sysmon Event ID 7045 or equivalent.
+- Look for ProcessName or CommandLine containing 'powershell' with flags such as:
+  - -enc
+  - -encodedcommand
+  - -nop
+  - -noninteractive
+  - -windowstyle
 
-    ```bash
-    Event
-    | where EventID == 7045
-    | project TimeGenerated, ServiceName, ServiceFileName
+## CMD with Unusual Parent
 
-## 3. RDP Brute Force Attempt
-**MITRE Technique:** T1110 — Brute Force
-**Logic:**
-- Detect repeated failed RDP login attempts from the same IP.
-- Look for Windows Security Event ID 4625.
+- Detect cmd.exe processes where the ParentImage is not explorer.exe, cmd.exe, powershell.exe, or services.exe
 
-    ```bash
-    SecurityEvent
-    | where EventID == 4625 and LogonType == 10
-    | summarize Attempts = count() by IpAddress
-    | where Attempts > 10
+## LSASS Access
+
+- Detect events where TargetImage or TargetProcess is lsass.exe (often EventID 10)
+
+## Service Creation
+
+- Detect Event ID 7045 indicating new service installation
+
+## Scheduled Task Creation
+
+- Detect Event ID 4698 or schtasks.exe execution
+
+## Certutil Usage
+
+- Detect certutil.exe usage with suspicious flags (-urlcache, -decode, -encode)
+
+## Mimikatz Detection
+
+- Detect any command line containing the string 'mimikatz'
