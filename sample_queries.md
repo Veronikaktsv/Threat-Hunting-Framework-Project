@@ -7,7 +7,8 @@
 - Look for event ID 4104 (Script Block Logging) or Sysmon Event ID 1 (Process Creation).
 
 **Example KQL Query:**
-    ```
+
+    ```bash
     Event
     | where EventID == 1 and ProcessName == "powershell.exe"
     | where CommandLine contains "-EncodedCommand" or CommandLine contains "-ExecutionPolicy Bypass"
@@ -18,10 +19,10 @@
 - Detect creation of new services.
 - Look for Sysmon Event ID 7045 or equivalent.
 
-  ```kql
-Event
-| where EventID == 7045
-| project TimeGenerated, ServiceName, ServiceFileName
+    ```bash
+    Event
+    | where EventID == 7045
+    | project TimeGenerated, ServiceName, ServiceFileName
 
 ## 3. RDP Brute Force Attempt
 **MITRE Technique:** T1110 — Brute Force
@@ -29,8 +30,8 @@ Event
 - Detect repeated failed RDP login attempts from the same IP.
 - Look for Windows Security Event ID 4625.
 
-  ```kql
-SecurityEvent
-| where EventID == 4625 and LogonType == 10
-| summarize Attempts = count() by IpAddress
-| where Attempts > 10
+    ```bash
+    SecurityEvent
+    | where EventID == 4625 and LogonType == 10
+    | summarize Attempts = count() by IpAddress
+    | where Attempts > 10
